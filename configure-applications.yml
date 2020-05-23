@@ -1,0 +1,32 @@
+# configure-applications.yml
+
+---
+  - name: Setup Database Server
+    hosts: db_servers
+    become: yes
+    become_method: sudo
+    connection: ssh
+    tasks:
+      - name: ping
+        ping:     
+    roles:
+      - firewallD
+      - python
+      - mysqldb
+
+  # - name: Setup Webserver
+  #   hosts: web_servers
+  #   become: yes
+  #   become_method: sudo
+  #   connection: ssh
+  #   roles:
+  #     - python
+  #     - flaskapp
+
+
+
+ 
+      
+
+
+

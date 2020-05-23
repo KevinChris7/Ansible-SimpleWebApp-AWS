@@ -1,0 +1,55 @@
+    - name: Install packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - python-setuptools
+        - mysql80-community-release-el7-3.noarch.rpm
+        - mysql-community-server 
+    - name: Install PIP
+      command: easy_install pip        
+    - name: Install Flask 
+      pip:
+        name: "{{ item }}"
+        state: latest
+      loop: 
+        - flask
+        - flask-mysql
+
+    - name: Configure FirewallD for Web
+      firewalld:
+        permanent: yes
+        port: 80/tcp
+        zone: public
+        state: enabled
+        immediate: yes
+    - name: Download GIT and Prerequisite
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        #- PyGithub
+    - name: Clone Github for code
+      git:
+        repo: "{{github_repo}}"
+        dest: /flask/src/
+        clone: yes
+    - name: Print check
+      debug:
+        msg: "FLASK_APP= /flask/src/app.py nohup flask run --host=0.0.0.0 --port=80 &"
+
+    - name: Start Flask Web Server
+      shell: FLASK_APP= /flask/src/app.py nohup flask run --host=0.0.0.0 --port=80 &
+
+    # - name: Update index.php
+    #   lineinfile:
+    #     insertafter:
+    #     regex: 'mysqli_connect(.*)'
+    #     path: /var/www/html
+    #     line: 
+    #     state: present
+    # - name: Test the Application
+    #   uri:
+    #     url: http://localhost
+    #     method: GET

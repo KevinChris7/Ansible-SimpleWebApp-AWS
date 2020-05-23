@@ -1,0 +1,43 @@
+    - name: Install Mysql server
+      yum:
+        name: "{{ item }}"    
+        state: latest
+      loop:
+        - MySQL-python
+        - python-virtualenv
+        - python-setuptools
+        - polkit
+        - wget
+      become: true
+    - name: Install Amazon Dependencies
+      command: wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+
+    - name: Install Mysql server2
+      yum:
+        name: "{{ item }}"    
+        state: latest
+      loop:
+        - mysql80-community-release-el7-3.noarch.rpm
+        - mysql-community-server 
+      become: true
+
+    - name: Update MySQL Configuration file to accept connections from all interfaces
+      ini_file:
+        path: /etc/mysql/my.cnf
+        section: mysqld
+        option: bind-address
+        value: 0.0.0.0
+  
+
+    - name: Start and Enable Mysql 
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes        
+    - name: Configure FirewallD for Database
+      firewalld:
+        permanent: yes
+        port: 3306/tcp
+        zone: public
+        state: enabled
+        immediate: yes

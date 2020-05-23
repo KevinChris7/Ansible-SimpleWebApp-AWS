@@ -1,0 +1,104 @@
+
+    - name: Install Mysql server
+      yum:
+        name: "{{ item }}"    
+        state: latest
+      loop:
+        - MySQL-python
+        - python-virtualenv
+        - python-setuptools
+        - polkit
+        - wget
+      become: true
+    - name: Install Amazon Dependencies
+      command: wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+
+    - name: Install Mysql server2
+      yum:
+        name: "{{ item }}"    
+        state: latest
+      loop:
+        - mysql80-community-release-el7-3.noarch.rpm
+        - mysql-community-server 
+      become: true
+
+    - name: Update MySQL Configuration file to accept connections from all interfaces
+      ini_file:
+        path: /etc/mysql/my.cnf
+        section: mysqld
+        option: bind-address
+        value: 0.0.0.0
+  
+
+    - name: Start and Enable Mysql 
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes        
+    - name: Configure FirewallD for Database
+      firewalld:
+        permanent: yes
+        port: 3306/tcp
+        zone: public
+        state: enabled
+        immediate: yes
+    
+
+    # - name: Creates a MySQL Database
+    #   mysql_db:
+    #     # login_host: localhost
+    #     # login_password: "{{ db_password }}"        
+    #     # login_user: "{{ db_user }}"
+    #     name: "{{ mysql_db_name }}"
+    #     state: present
+
+    # - name: Adds a user to MySQL Database
+    #   mysql_user:
+    #     host: '%'
+    #     #login_host: localhost
+    #     login_password: "{{ db_password }}"
+    #     login_user: "{{ db_user }}"
+    #     check_implicit_admin: yes
+    #     name: root
+    #     password: "{{ new_db_password }}"
+    #     priv: '*.*:ALL'
+    #     state: present
+    # - name: test mysql_secure_installation
+    #   mysql_secure_installation:
+    #     login_password: ''
+    #     new_password: password22
+    #     user: root
+    #     login_host: localhost
+    #     hosts: ['localhost', '127.0.0.1', '::1']
+    #     change_root_password: true
+    #     remove_anonymous_user: true
+    #     disallow_root_login_remotely: true
+    #     remove_test_db: true
+    #   register: mysql_secure
+
+    # # To see detailed output
+    # - debug:
+    #     var: mysql_secure
+
+    # # - name: Set root user password
+    # #   # If .my.cnf already exists, this will cause an mysql-root-password update.
+    # #   mysql_user:
+    # #     name: root
+    # #     password: "{{ new_db_password }}"
+    # #     check_implicit_admin: true
+
+    # - name: Create .my.cnf
+    #   template:
+    #     src: "client.my.cnf.j2"
+    #     dest: "/root/.my.cnf"
+    #     owner: root
+    #     group: root
+    #     mode: 0600
+
+    # - name: Creates a MySQL Database
+    #   mysql_db:
+    #     login_host: localhost
+    #     login_password: "{{ db_password }}"        
+    #     login_user: "{{ db_user }}"
+    #     name: "{{ mysql_db_name }}"
+    #     state: present

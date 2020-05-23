@@ -1,0 +1,14 @@
+    - name: Install FirewallD
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - firewalld
+    - name: Start FirewallD
+      service:
+        name: firewalld
+        state: started
+    - name: Enable FirewallD
+      systemd:
+        name: firewalld
+        enabled: yes

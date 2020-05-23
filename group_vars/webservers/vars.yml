@@ -1,0 +1,23 @@
+
+    mysql_db_name: "CJK"
+    db_user: "admin"
+    db_password: "admin"
+    #new_db_password: "admin1"
+    mysql_root_password: "adminadmin"
+    github_repo: "https://github.com/mmumshad/simple-webapp-flask.git"
+    user_mail: "kevinchristopherkc7@gmail.com"
+
+    aws_region: "ap-south-1"
+    image_id: "ami-003b12a9a1ee83922"
+    instance_type: "t2.micro"
+    key_pair: "my_ec2_keypair"
+    security_group: "launch-wizard-5"
+    AWS_ACCESS_KEY: "{{ vault_AWS_ACCESS_KEY }}"
+    AWS_SECRET_ACCESS_KEY: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
+
+    instance_list:
+        #- webserverA
+        - dbserverB
+    
+    loadbalancer_instances:
+        - webserverA

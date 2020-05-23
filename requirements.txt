@@ -1,0 +1,4 @@
+Inventory path set in ansible.cfg file
+private key path set in ansible.cfg file
+
+AWS Keys for access and encrypt using vault

@@ -1,0 +1,33 @@
+# configure-networking.yml
+
+---
+  - name: Configure Load Balancer and Notify Mail
+    hosts: webservers
+    gather_facts: false
+    tasks:
+      - name: Creates an Application Loadbalancer
+        ec2_elb_lb:
+          name: Load Balancer for web instances
+          aws_access_key: "{{ AWS_ACCESS_KEY }}"
+          aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+          instance_ids: "{{ loadbalancer_instances }}"
+          listeners:
+            - protocol: http
+              load_balancer_port: 80
+              instance_port: 80
+              proxy_protocol: true
+
+          region: "{{ aws_region }}"
+          security_group_names:
+            - security_group
+          state: present
+          wait: yes
+    
+      - name: Send a Notification Mail
+        ignore_errors: true
+        mail:
+          from: cjkadmin
+          host: localhost
+          subject: Flask Application Web and DB Servers are Deployed
+          body: System {{ ansible_host }} has been successfully provisioned
+          to: "{{ user_mail }}"

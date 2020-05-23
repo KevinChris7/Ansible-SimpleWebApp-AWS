@@ -1,0 +1,33 @@
+    - name: Install Flask 
+      pip:
+        name: "{{ item }}"
+        state: latest
+      loop: 
+        - flask
+        - flask-mysql
+
+    - name: Configure FirewallD for Web
+      firewalld:
+        permanent: yes
+        port: 80/tcp
+        zone: public
+        state: enabled
+        immediate: yes
+    - name: Download GIT and Prerequisite
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        #- PyGithub
+    - name: Clone Github for code
+      git:
+        repo: "{{github_repo}}"
+        dest: /flask/src/
+        clone: yes
+    - name: Print check
+      debug:
+        msg: "FLASK_APP= /flask/src/app.py nohup flask run --host=0.0.0.0 --port=80 &"
+
+    - name: Start Flask Web Server
+      shell: FLASK_APP= /flask/src/app.py nohup flask run --host=0.0.0.0 --port=80 &

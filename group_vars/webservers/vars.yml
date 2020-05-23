@@ -16,7 +16,7 @@
     AWS_SECRET_ACCESS_KEY: "{{ vault_AWS_SECRET_ACCESS_KEY }}"
 
     instance_list:
-        #- webserverA
+        - webserverA
         - dbserverB
     
     loadbalancer_instances:

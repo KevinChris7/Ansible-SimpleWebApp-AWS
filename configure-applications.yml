@@ -14,14 +14,14 @@
       - python
       - mysqldb
 
-  # - name: Setup Webserver
-  #   hosts: web_servers
-  #   become: yes
-  #   become_method: sudo
-  #   connection: ssh
-  #   roles:
-  #     - python
-  #     - flaskapp
+  - name: Setup Webserver
+    hosts: web_servers
+    become: yes
+    become_method: sudo
+    connection: ssh
+    roles:
+      - python
+      - flaskapp
 
 
 

@@ -1,5 +1,9 @@
 # **Ansible-SimpleWebApp-AWS**
 
+## **About Ansible**
+
+Ansible is a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs.
+
 ## **About Project**
 
 1.Deploying the AWS EC2 Servers as Web Servers and DB Server.
@@ -15,6 +19,7 @@
 This version of playbooks and roles was last tested on:
 
 Ubuntu 18.04
+
 Ansible 3.8.2
 
 ## **Infrastructure**
@@ -29,4 +34,26 @@ Ubuntu WSL as Ansible Controller
 
 1.Install Ansible on Ubuntu machine
 
+> sudo apt install ansible
 
+2.Clone this repository
+
+> git clone git@github.com:KevinChris7/Ansible-SimpleWebApp-AWS.git
+
+3.Add hosts to hosts-dev inventory file
+
+4.To Run the file
+
+> ansible-playbook site.yml
+
+## **Project Insider**
+
+- **Tasks**: A Task to deploy ec2 instances
+
+- **Roles**: firewalldD: A role to install Firewall
+
+- **Roles**: python: A role to install python dependencies
+
+- **Roles**: mysqldb: A role to install and configure MySQL on any given systems
+
+- **Roles**: flaskapp: A role to install and configure Flask application on multiple servers

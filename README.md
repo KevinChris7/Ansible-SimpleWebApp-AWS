@@ -3,8 +3,11 @@
 ## **About Project**
 
 1.Deploying the AWS EC2 Servers as Web Servers and DB Server.
+
 2.Installing required softwares in both servers using roles and tasks.
+
 3.Create and configure the load balancer for the Web Servers to manage traffic
+
 4.Finally Send the notification mail to the PIC
 
 ## **System requirements**

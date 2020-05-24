@@ -2,7 +2,6 @@
     mysql_db_name: "CJK"
     db_user: "admin"
     db_password: "admin"
-    #new_db_password: "admin1"
     mysql_root_password: "adminadmin"
     github_repo: "https://github.com/mmumshad/simple-webapp-flask.git"
     user_mail: "kevinchristopherkc7@gmail.com"

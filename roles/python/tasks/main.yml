@@ -7,9 +7,7 @@
         - python.x86_64
         - mysql80-community-release-el7-3.noarch.rpm
         - mysql-community-server
-
-    # - name: Install PIP
-    #   command: easy_install pip   
+ 
     - name: Install Boto
       pip:
         name: "{{ item }}"

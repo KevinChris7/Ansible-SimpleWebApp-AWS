@@ -41,15 +41,3 @@
 
     - name: Start Flask Web Server
       shell: FLASK_APP= /flask/src/app.py nohup flask run --host=0.0.0.0 --port=80 &
-
-    # - name: Update index.php
-    #   lineinfile:
-    #     insertafter:
-    #     regex: 'mysqli_connect(.*)'
-    #     path: /var/www/html
-    #     line: 
-    #     state: present
-    # - name: Test the Application
-    #   uri:
-    #     url: http://localhost
-    #     method: GET

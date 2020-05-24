@@ -38,7 +38,7 @@ Ubuntu WSL as Ansible Controller
 
 2.Clone this repository
 
-> git clone git@github.com:KevinChris7/Ansible-SimpleWebApp-AWS.git
+> git clone https://github.com/KevinChris7/Ansible-SimpleWebApp-AWS.git
 
 3.Add hosts to hosts-dev inventory file
 

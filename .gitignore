@@ -1,6 +1,7 @@
 #Ansible
 group_vars/webservers/vault.yml
-tasks/
+tasks/deploy_dbservers.yml
+tasks/deploy_webservers.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

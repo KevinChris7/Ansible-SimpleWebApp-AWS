@@ -3,6 +3,7 @@ group_vars/webservers/vault.yml
 tasks/
 tasks/deploy_dbservers.yml
 tasks/deploy_webservers.yml
+libc6_2.31-0ubuntu8+lp1871129~1_amd64.deb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

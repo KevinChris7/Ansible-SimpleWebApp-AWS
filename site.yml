@@ -1,13 +1,6 @@
 # site.yml
 
 ---
-  # - name: Test ping on localhost
-  #   hosts: localhost
-  #   connection: local
-  #   become: yes
-  #   tasks:
-  #     - name: Ping!
-  #       ping: 
 
   - import_playbook: aws-ec2.yml
   - import_playbook: configure-applications.yml

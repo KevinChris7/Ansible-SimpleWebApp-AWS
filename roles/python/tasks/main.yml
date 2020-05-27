@@ -1,16 +1,18 @@
-    - name: Install packages
-      yum:
+    - name: Install packages      
+      apt:
         name: "{{ item }}"
         state: latest
       loop:
         - python-setuptools
-        - python.x86_64
-        - mysql80-community-release-el7-3.noarch.rpm
-        - mysql-community-server
+        - python3-pip
+        - mysql-server-8.0
+        # - python.x86_64
+        # - mysql80-community-release-el7-3.noarch.rpm
+        # - mysql-community-server
  
     - name: Install Boto
       pip:
         name: "{{ item }}"
         state: latest
       loop:
-        - boto          
+        - boto3          

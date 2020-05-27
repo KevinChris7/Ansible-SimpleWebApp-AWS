@@ -5,7 +5,7 @@
     mysql_root_password: "adminadmin"
     github_repo: "https://github.com/mmumshad/simple-webapp-flask.git"
     user_mail: "kevinchristopherkc7@gmail.com"
-
+    public_key_file:  "~/.ssh/id_rsa.pub"
     aws_region: "ap-south-1"
     image_id: "ami-003b12a9a1ee83922"
     instance_type: "t2.micro"

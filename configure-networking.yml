@@ -3,7 +3,6 @@
 ---
   - name: Configure Load Balancer and Notify Mail
     hosts: localhost
-    connection: local
     gather_facts: false
     tasks:
       - name: Creates an Application Loadbalancer

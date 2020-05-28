@@ -28,7 +28,6 @@
         option: bind-address
         value: 0.0.0.0
   
-
     - name: Start and Enable Mysql 
       systemd:
         name: mysqld

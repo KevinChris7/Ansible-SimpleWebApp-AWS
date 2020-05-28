@@ -5,7 +5,7 @@
       loop:
         - python-setuptools
         - python3-pip
-        - mysql-server-8.0
+        #- mysql-server-8.0
         # - python.x86_64
         # - mysql80-community-release-el7-3.noarch.rpm
         # - mysql-community-server

@@ -4,24 +4,38 @@
   - name: Configure Load Balancer and Notify Mail
     hosts: localhost
     gather_facts: false
+    vars:
+      elb_name: Load-Balancer-web-instances
     tasks:
       - name: Creates an Application Loadbalancer
         ec2_elb_lb:
-          name: Load Balancer for web instances
+          name: "{{ elb_name }}"
           aws_access_key: "{{ AWS_ACCESS_KEY }}"
           aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
-          instance_ids: "{{ loadbalancer_instances }}"
           listeners:
             - protocol: http
               load_balancer_port: 80
               instance_port: 80
               proxy_protocol: true
-
+          subnets:
+            - subnet-61395b2d
           region: "{{ aws_region }}"
-          security_group_names:
-            - security_group
+          security_group_ids:
+            - sg-0795b04f5c81e1407
           state: present
           wait: yes
+        register: ec2_elb_lb
+
+      - name: Attach Web Instances to ELB
+        ec2_elb: 
+          aws_access_key: "{{ AWS_ACCESS_KEY }}"
+          aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}" 
+          region: "{{ aws_region }}"       
+          instance_id: "{{ item.id }}"
+          ec2_elbs: "{{ elb_name }}"
+          state: present
+          wait: yes
+        loop: "{{ ec2.results[0].instances }}"
     
       - name: Send a Notification Mail
         ignore_errors: true

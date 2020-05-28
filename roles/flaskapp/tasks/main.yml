@@ -5,21 +5,21 @@
       loop: 
         - flask
         - flask-mysql
+        - firewall
 
-    - name: Configure FirewallD for Web
-      firewalld:
-        permanent: yes
-        port: 80/tcp
-        zone: public
-        state: enabled
-        immediate: yes
+    # - name: Configure FirewallD for Web
+    #   firewalld:
+    #     permanent: yes
+    #     port: 80/tcp
+    #     zone: public
+    #     state: enabled
+    #     immediate: yes
     - name: Download GIT and Prerequisite
       yum:
         name: "{{ item }}"
         state: present
       loop:
         - git
-        #- PyGithub
     - name: Clone Github for code
       git:
         repo: "{{github_repo}}"

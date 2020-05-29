@@ -20,6 +20,8 @@ This version of playbooks and roles was last tested on:
 
 Ubuntu 18.04
 
+Python 3.8
+
 Ansible 3.8.2
 
 ## **Infrastructure**
@@ -44,7 +46,7 @@ Ubuntu WSL as Ansible Controller
 
 4.To Run the file
 
-> ansible-playbook site.yml
+> ansible-playbook site.yml --ask-vault-pass
 
 ## **Project Insider**
 

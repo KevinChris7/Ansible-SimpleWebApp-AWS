@@ -24,7 +24,7 @@
             - sg-0795b04f5c81e1407
           state: present
           wait: yes
-        register: ec2_elb_lb
+        register: elb
 
       - name: Attach Web Instances to ELB
         ec2_elb: 
@@ -34,14 +34,15 @@
           instance_id: "{{ item.id }}"
           ec2_elbs: "{{ elb_name }}"
           state: present
-          wait: yes
+          wait: no
+          wait_timeout: 330
         loop: "{{ ec2.results[0].instances }}"
     
       - name: Send a Notification Mail
         ignore_errors: true
         mail:
-          from: cjkadmin
           host: localhost
-          subject: Flask Application Web and DB Servers are Deployed
-          body: System {{ ansible_host }} has been successfully provisioned
+          port: 25
+          subject: "[Ansible-report]Flask Application Web and DB Servers are Deployed"
+          body: System has been successfully provisioned.
           to: "{{ user_mail }}"

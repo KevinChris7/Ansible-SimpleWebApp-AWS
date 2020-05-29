@@ -33,10 +33,10 @@
         name: mysqld
         state: started
         enabled: yes        
-    - name: Configure FirewallD for Database
-      firewalld:
-        permanent: yes
-        port: 3306/tcp
-        zone: public
-        state: enabled
-        immediate: yes
+    # - name: Configure FirewallD for Database
+    #   firewalld:
+    #     permanent: yes
+    #     port: 3306/tcp
+    #     zone: public
+    #     state: enabled
+    #     immediate: yes
